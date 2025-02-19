@@ -1,0 +1,4 @@
+GET	/api/layouts	Get all layouts (Admin)
+POST	/api/layouts/assign	Assign a layout to a user
+PUT	/api/layouts/update	Update a user's layout
+GET	/api/layouts/user?userId=1	Get user's assigned layout
