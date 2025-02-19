@@ -1,0 +1,30 @@
+
+create database layoutdb;
+
+CREATE TABLE layout (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    assigned_layout_id INT,
+    FOREIGN KEY (assigned_layout_id) REFERENCES layout(id) ON DELETE SET NULL
+);
+
+CREATE TABLE user_group (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    layout_id BIGINT,
+    FOREIGN KEY (layout_id) REFERENCES layout(id) ON DELETE SET NULL
+);
+
+CREATE TABLE user_group_mapping (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT,
+    group_id BIGINT,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (group_id) REFERENCES user_group(id) ON DELETE CASCADE
+);
